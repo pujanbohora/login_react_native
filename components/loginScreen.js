@@ -7,15 +7,18 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
+  StyleSheet,
   Alert,
+  Button,
 } from 'react-native';
 
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = ({navigation}) => {
   const [form, setForm] = useState({ email: '', password: '' });
 
   const handleLogin = () => {
     console.log(form.email);
-    Alert.alert('User Login', `${form.email} ${form.password}`);
+    navigation.navigate('Home');
+    // Alert.alert('User Login', `${form.email} ${form.password}`);
   };
 
   return (
