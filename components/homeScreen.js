@@ -6,12 +6,15 @@ import {
   ImageBackground,
   ActivityIndicator,
   TouchableOpacity,
+  Dimensions,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 
 function HomeScreen({ navigation }) {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
+
+  const { width: screenWidth } = Dimensions.get('window');
 
   useEffect(() => {
     getMovies();
@@ -35,6 +38,8 @@ function HomeScreen({ navigation }) {
     uri: "https://i.pinimg.com/564x/b9/7d/dd/b97ddd4e6554c9840a8ae3082e05d69e.jpg",
   };
 
+  
+
   return (
     <View style={styles.mainContainer}>
       {isLoading ? (
@@ -42,12 +47,13 @@ function HomeScreen({ navigation }) {
           style={{ flexDirection: "column", justifyContent: "center", flex: 1 }}
         />
       ) : (
-        <TouchableOpacity onPress={()=>{
-          navigation.navigate("cardDetail")
-        }}>
-          <View style={styles.moviesContainer}>
+        <View style={styles.moviesContainer}>
           {data.map((item) => (
-            <View key={item.key} style={styles.mainCard}>
+            <TouchableOpacity onPress={()=>{
+              console.log("pressed")
+              navigation.navigate("cardDetail")
+            }}>
+            <View key={item.key} style={styles.mainCard} >
               <View
                 style={{
                   flex: 1,
@@ -66,9 +72,9 @@ function HomeScreen({ navigation }) {
                 </ImageBackground>
               </View>
             </View>
+            </TouchableOpacity>
           ))}
         </View>
-        </TouchableOpacity>
       )}
       {/* <Button
         title="Go to Profile"
@@ -86,14 +92,15 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     // padding: 10,
-    paddingTop: 20,
-    paddingLeft: 20,
+    // paddingTop: 20,
+    // paddingLeft: 20,
   },
   mainCard: {
-    paddingRight: 5,
-    paddingBottom: 5,
+    // paddingRight: 5,
+    // paddingBottom: 5,
     height: 150,
-    width: 170,
+    width: 191.5,
+  
   },
   title: {
     fontSize: 14,
@@ -132,6 +139,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "start",
+    gap: 10,
+    gapRow:10
   },
 });
 
